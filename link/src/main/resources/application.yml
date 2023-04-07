@@ -1,7 +1,19 @@
 server:
   port: 9002
+
+spring:
+  application:
+    name:link-server
+  datasource:
+    url: jdbc:mysql://49.232.223.214:3306/index?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root2
+    password: root2
+
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:9001/eureka/
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*Mapper.xml
 
