@@ -1,5 +1,9 @@
 package com.redemption.link.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -19,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Controller
 @RequestMapping("/link")
+@Tag(name = "link", description = "the link API")
 public class LinkAction {
 
 
@@ -48,6 +53,11 @@ public class LinkAction {
         return new ResponseEntity<>("created successfully", HttpStatus.OK);
     }
 
+    @Operation(summary = "删除链接", description = "通过此接口删除", tags = { "link" })
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "400", description = "提供的id无效"),
+        @ApiResponse(responseCode = "404", description = "未找到要删除的链接")
+    })
     @PostMapping(value = "/delete/{id}")
     public ResponseEntity<Object> delete(@PathVariable("id") String id) {
         linkService.removeById(id);

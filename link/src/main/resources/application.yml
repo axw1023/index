@@ -17,3 +17,7 @@ eureka:
 mybatis-plus:
   mapper-locations: classpath:mapper/*Mapper.xml
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
