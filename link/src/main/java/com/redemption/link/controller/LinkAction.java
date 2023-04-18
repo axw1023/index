@@ -30,7 +30,8 @@ public class LinkAction {
     @Autowired
     private LinkService linkService;
 
-    @GetMapping(value = "/")
+    @Operation(summary = "查询列表", tags = { "link" })
+    @GetMapping(value = "/list")
     public ResponseEntity<Page<Link>> list(@RequestParam(required = false) Integer current, @RequestParam(required = false) Integer pageSize) {
         if (current == null) {
             current = 1;
