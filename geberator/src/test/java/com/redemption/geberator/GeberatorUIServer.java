@@ -1,10 +1,12 @@
 package com.redemption.geberator;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.github.davidfantasy.mybatisplus.generatorui.GeneratorConfig;
 import com.github.davidfantasy.mybatisplus.generatorui.MybatisPlusToolsApplication;
 import com.github.davidfantasy.mybatisplus.generatorui.mbp.NameConverter;
 import com.github.davidfantasy.mybatisplus.generatorui.mbp.TemplateVaribleInjecter;
+import com.google.common.base.Strings;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +36,9 @@ public class GeberatorUIServer {
           public String controllerNameConvert(String tableName) {
             return this.entityNameConvert(tableName) + "Action";
           }
-        }).templateVaribleInjecter(new TemplateVaribleInjecter() {
+        })
+
+        .templateVaribleInjecter(new TemplateVaribleInjecter() {
           @Override
           public Map<String, Object> getCustomTemplateVaribles(TableInfo tableInfo) {
             Map<String, Object> params = new HashMap<>();
@@ -45,6 +49,25 @@ public class GeberatorUIServer {
             return params;
           }
         })
+
+        //补齐表名（带下划线的表名，不补齐会出现生成不全的情况）
+        .nameConverter(new NameConverter() {
+          // 加这个
+          @Override
+          public String entityNameConvert(String tableName) {
+            if (Strings.isNullOrEmpty(tableName)) {
+              return "";
+            } else {
+              String[] s = tableName.split("_");
+              String name = s[0];
+              for (int i = 1; i < s.length; i++) {
+                name += StrUtil.upperFirst(StrUtil.toCamelCase(s[i].toLowerCase()));
+              }
+              return name;
+            }
+          }
+        })
+
         //所有生成的java文件的父包名，后续也可单独在界面上设置
         .basePackage("com.redemption.link")
         .port(8068)
