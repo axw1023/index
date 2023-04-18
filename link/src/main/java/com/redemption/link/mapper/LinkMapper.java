@@ -1,8 +1,7 @@
 package com.redemption.link.mapper;
 
-import com.redemption.link.entity.Link;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
+import com.redemption.link.entity.Link;
 
 /**
  * <p>
@@ -12,7 +11,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @author axw
  * @since 2023-04-07
  */
-@Mapper
 public interface LinkMapper extends BaseMapper<Link> {
 
 }
