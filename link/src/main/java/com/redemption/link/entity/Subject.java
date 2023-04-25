@@ -2,6 +2,7 @@ package com.redemption.link.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -27,6 +28,7 @@ public class Subject implements Serializable {
   private Long id;
 
   @Schema(description = "名称（限制4字）")
+  @Size(min = 1, max = 8,message = "长度不超过4个字")
   private String subjectName;
 
   @Schema(description = "图片")

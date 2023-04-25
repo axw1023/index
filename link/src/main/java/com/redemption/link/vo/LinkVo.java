@@ -1,9 +1,9 @@
-package com.redemption.link.entity;
+package com.redemption.link.vo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,12 +17,10 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@Schema(name = "Link", description = "链接")
-public class Link implements Serializable {
+@Schema(description = "链接Vo")
+public class LinkVo implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @Schema(description = "名称")
     private String linkName;
@@ -32,7 +30,4 @@ public class Link implements Serializable {
 
     @Schema(description = "说明")
     private String linkExplain;
-
-    @Schema(description = "分组id")
-    private Long fnSubjectId;
 }
