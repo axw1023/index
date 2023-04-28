@@ -36,7 +36,9 @@ public class LinkServiceImpl extends ServiceImpl<LinkMapper, Link> implements Li
             page,
             new QueryWrapper<Link>()
                 .lambda()
-                .ge(Link::getFnSubjectId, map.get("fnSubjectId")));
+                .select(Link::getId)
+                .eq(Link::getFnSubjectId, map.get("fnSubjectId"))
+        );
         return linkVoIPage;
     }
 }

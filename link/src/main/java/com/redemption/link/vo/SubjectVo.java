@@ -34,7 +34,4 @@ public class SubjectVo implements Serializable {
 
     @Schema(description = "说明")
     private String subjectExplain;
-
-    @Schema(description = "链接list")
-    private IPage<LinkVo> linkIPage;
 }

@@ -35,7 +35,7 @@ public class SubjectAction {
         if (pageSize == null) {
             pageSize = 10;
         }
-        IPage<SubjectVo> aPage = subjectService.subjectPage(new Page<>(current, pageSize));
+        IPage<SubjectVo> aPage = subjectService.subjectVoPage(new Page<>(current, pageSize));
         return new ResponseEntity<>(aPage, HttpStatus.OK);
     }
 

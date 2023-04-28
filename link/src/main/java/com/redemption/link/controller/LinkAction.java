@@ -1,9 +1,12 @@
 package com.redemption.link.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.redemption.link.vo.LinkVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.Map;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -30,16 +33,17 @@ public class LinkAction {
     @Autowired
     private LinkService linkService;
 
-    @Operation(summary = "查询列表", tags = { "link" })
+    @Operation(summary = "查询列表", tags = {"link"})
     @GetMapping(value = "/list")
-    public ResponseEntity<Page<Link>> list(@RequestParam(required = false) Integer current, @RequestParam(required = false) Integer pageSize) {
+    public ResponseEntity<IPage<LinkVo>> list(@RequestParam(required = false) Integer current,
+        @RequestParam(required = false) Integer pageSize, @RequestParam(required = false) Map map) {
         if (current == null) {
             current = 1;
         }
         if (pageSize == null) {
             pageSize = 10;
         }
-        Page<Link> aPage = linkService.page(new Page<>(current, pageSize));
+        IPage<LinkVo> aPage = linkService.linkVoPage(new Page<>(current, pageSize), null);
         return new ResponseEntity<>(aPage, HttpStatus.OK);
     }
 
@@ -54,7 +58,7 @@ public class LinkAction {
         return new ResponseEntity<>("created successfully", HttpStatus.OK);
     }
 
-    @Operation(summary = "删除链接", description = "通过此接口删除", tags = { "link" })
+    @Operation(summary = "删除链接", description = "通过此接口删除", tags = {"link"})
     @ApiResponses(value = {
         @ApiResponse(responseCode = "400", description = "提供的id无效"),
         @ApiResponse(responseCode = "404", description = "未找到要删除的链接")

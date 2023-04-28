@@ -17,6 +17,6 @@ import java.util.Map;
  */
 public interface SubjectService extends IService<Subject> {
 
-    IPage<SubjectVo> subjectPage(Page page);
+    IPage<SubjectVo> subjectVoPage(Page page);
 
 }
