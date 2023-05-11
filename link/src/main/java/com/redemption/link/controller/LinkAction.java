@@ -1,20 +1,25 @@
 package com.redemption.link.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.redemption.link.entity.Link;
+import com.redemption.link.service.LinkService;
 import com.redemption.link.vo.LinkVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Map;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import com.redemption.link.service.LinkService;
-import com.redemption.link.entity.Link;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * <p>
@@ -43,7 +48,7 @@ public class LinkAction {
         if (pageSize == null) {
             pageSize = 10;
         }
-        IPage<LinkVo> aPage = linkService.linkVoPage(new Page<>(current, pageSize), null);
+        IPage<LinkVo> aPage = linkService.linkVoPage(new Page<>(current, pageSize), map);
         return new ResponseEntity<>(aPage, HttpStatus.OK);
     }
 

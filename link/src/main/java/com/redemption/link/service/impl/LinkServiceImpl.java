@@ -3,15 +3,15 @@ package com.redemption.link.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.redemption.link.entity.Link;
+import com.redemption.link.entity.Subject;
 import com.redemption.link.mapper.LinkMapper;
 import com.redemption.link.service.LinkService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.redemption.link.vo.Converter;
 import com.redemption.link.vo.LinkVo;
 import com.redemption.link.vo.SubjectVo;
-import java.util.List;
 import java.util.Map;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,9 +36,12 @@ public class LinkServiceImpl extends ServiceImpl<LinkMapper, Link> implements Li
             page,
             new QueryWrapper<Link>()
                 .lambda()
-                .select(Link::getId)
+//                .select(Link::getId)
                 .eq(Link::getFnSubjectId, map.get("fnSubjectId"))
-        );
+        ).convert(n -> {
+            LinkVo linkVo = Converter.INSTANT.convertLinkVo((Link) n);
+            return linkVo;
+        });
         return linkVoIPage;
     }
 }
