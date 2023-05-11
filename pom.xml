@@ -12,10 +12,15 @@
   <artifactId>index</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>index</name>
+  <packaging>pom</packaging>
   <description>index</description>
   <properties>
     <java.version>17</java.version>
   </properties>
+  <modules>
+    <module>link</module>
+  </modules>
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
