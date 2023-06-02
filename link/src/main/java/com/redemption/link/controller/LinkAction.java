@@ -60,7 +60,7 @@ public class LinkAction {
     @PostMapping(value = "/create")
     public ResponseEntity<Object> create(@RequestBody Link params) {
         linkService.save(params);
-        return new ResponseEntity<>("created successfully", HttpStatus.OK);
+        return new ResponseEntity<>(params, HttpStatus.OK);
     }
 
     @Operation(summary = "删除链接", description = "通过此接口删除", tags = {"link"})

@@ -18,7 +18,7 @@ import lombok.Setter;
 @Schema(description = "链接Vo")
 public class LinkVo implements Serializable {
 
-    private Integer id;
+    private String id;
 
     @Schema(description = "名称")
     private String linkName;
@@ -28,4 +28,7 @@ public class LinkVo implements Serializable {
 
     @Schema(description = "说明")
     private String linkExplain;
+
+    @Schema(description = "点赞数")
+    private String likeCount;
 }

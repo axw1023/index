@@ -36,4 +36,7 @@ public class Link implements Serializable {
 
     @Schema(description = "分组id")
     private Long fnSubjectId;
+
+    @Schema(description = "点赞数")
+    private String likeCount;
 }

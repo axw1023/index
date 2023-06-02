@@ -5,12 +5,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.redemption.link.entity.Link;
-import com.redemption.link.entity.Subject;
 import com.redemption.link.mapper.LinkMapper;
+import com.redemption.link.service.LikeCountService;
 import com.redemption.link.service.LinkService;
 import com.redemption.link.vo.Converter;
 import com.redemption.link.vo.LinkVo;
-import com.redemption.link.vo.SubjectVo;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,16 +31,18 @@ public class LinkServiceImpl extends ServiceImpl<LinkMapper, Link> implements Li
 
     @Override
     public IPage<LinkVo> linkVoPage(Page page, Map map) {
-        IPage<LinkVo> linkVoIPage = linkMapper.selectPage(
+        IPage<Link> linkIPage = linkMapper.selectPage(
             page,
             new QueryWrapper<Link>()
                 .lambda()
-//                .select(Link::getId)
                 .eq(Link::getFnSubjectId, map.get("fnSubjectId"))
-        ).convert(n -> {
-            LinkVo linkVo = Converter.INSTANT.convertLinkVo((Link) n);
+        );
+
+        IPage<LinkVo> linkVoIPage = linkIPage.convert(n -> {
+            LinkVo linkVo = Converter.INSTANT.convertLinkVo(n);
             return linkVo;
         });
+
         return linkVoIPage;
     }
 }
